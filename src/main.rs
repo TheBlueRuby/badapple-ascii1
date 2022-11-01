@@ -1,6 +1,7 @@
 use std::{fs, io::BufReader, thread, time::Duration};
 
 use rodio::{source::Source, Decoder, OutputStream};
+use colored::*;
 
 fn main() {
     print!("\x1B[2J\x1B[1;1H");
@@ -22,13 +23,13 @@ fn main() {
         .unwrap();
 
     while frame_num <= 2180 {
-        print!("\x1b[1;1H"); //equiv to cls or clear
-        print!("{}", frames[frame_num]);
+        print!("{}", "\x1b[1;1H".white().on_black()); //equiv to cls or clear
+        print!("{}", frames[frame_num].black().on_white());
 
         frame_num += 1;
 
-        thread::sleep(Duration::from_secs_f32(1.0 / 10.625));
+        thread::sleep(Duration::from_secs_f32(1.0 / 10.67125)); // I spent literal hours figuring the exact value out compensating for lag
     }
 
-    print!("\x1B[2J\x1B[1;1H");
+    print!("{}", "\x1B[2J\x1B[1;1H".white().on_black());
 }
